@@ -12,25 +12,6 @@ import java.util.Collections;
 public class ExampleApplication {
 
     public static void main(String[] args) {
-        var app = new SpringApplication(ExampleApplication.class);
-        app.setDefaultProperties(Collections.singletonMap("spring.profiles.active", "dev"));
-        var run = app.run(args);
-
-        MyFirstService myFirstService = run.getBean(MyFirstService.class);
-        System.out.println(myFirstService.tellAStory());
-//        System.out.println(myFirstService.getJavaVersion());
-//        System.out.println(myFirstService.getOsName());
-//        System.out.println(myFirstService.readProp());
-        System.out.println(myFirstService.getCustomPropertyTest());
-        System.out.println(myFirstService.getCustomPropertyTestInt());
-        System.out.println(myFirstService.getGetCustomPropertyFromAnotherFile());
-        System.out.println(myFirstService.getGetCustomPropertyFromAnotherFile2());
-        System.out.println(myFirstService.getGetCustomProperty());
-        System.out.println(myFirstService.getGetCustomPropertyInt());
-
-
-
-//		MyFirstClass myFirstClass = new MyFirstClass();
-//		System.out.println(myFirstClass.sayHello());
+        SpringApplication.run(ExampleApplication.class,args);
     }
 }
