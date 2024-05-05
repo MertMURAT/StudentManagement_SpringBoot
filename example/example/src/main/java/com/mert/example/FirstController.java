@@ -3,52 +3,49 @@ package com.mert.example;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-public class FirstController {
+public class FirstController { 
 
-//    @GetMapping("/hello")
-//    public String sayHello(){
-//        return "Hello from my first controller";
-//    }
+    private final StudentRepository studentRepository;
 
-    @GetMapping("/hello-2")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public String sayHello2(){
-        return "Hello from my first controller - 2";
+    public FirstController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
-    @PostMapping("/post")
-    public String post(
-            @RequestBody String message){
-        return "Request accepted and message is : " + message;
+    @PostMapping("/students")
+    public Student post(
+            @RequestBody Student student){
+        return studentRepository.save(student);
     }
 
-    @PostMapping("/post-order")
-    public String postOrder(
-            @RequestBody Order order){
-        return "Request accepted and message is : " + order.toString();
+    @GetMapping("/students")
+    public List<Student> findAllStudent(){
+        return studentRepository.findAll();
     }
 
-    @PostMapping("/post-order-record")
-    public String postOrderRecord(
-            @RequestBody OrderRecord orderRecord){
-        return "Request accepted and message is : " + orderRecord.toString();
+
+    @GetMapping("/students/{student-id}")
+    public Student findStudentById(
+            @PathVariable("student-id") int id
+    ){
+        return studentRepository.findById(id)
+                .orElse(new Student());
     }
 
-    // http://localhost:8080/hello/mert
-    @GetMapping("/hello/{user-name}")
-    public String pathVar(
-            @PathVariable("user-name") String userName){
-        return "MY VALUE = " + userName;
+    @GetMapping("/students/search/{student-firstname}")
+    public List<Student> findStudentByFirstname(
+            @PathVariable("student-firstname") String firstname
+    ){
+        return studentRepository.findAllByFirstnameContaining(firstname);
     }
 
-    // http://localhost:8080/hello?param_name=paramvalue&param_name_2=value_2
-    @GetMapping("/hello")
-    public String paramVar(
-            @RequestParam("user-name") String userName,
-            @RequestParam("user-lastname") String userLastName
-        ){
-        return "my values = " + userName + " " + userLastName;
+    @DeleteMapping("/students/{student-id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteStudentById(
+            @PathVariable("student-id") Integer id
+    ){
+        studentRepository.deleteById(id);
     }
-
 }
