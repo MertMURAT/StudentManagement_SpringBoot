@@ -1,5 +1,8 @@
-package com.mert.example;
+package com.mert.example.student;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mert.example.school.School;
+import com.mert.example.studentprofile.StudentProfile;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,6 +32,7 @@ public class Student {
     @JoinColumn(
             name = "school_id"
     )
+    @JsonBackReference
     private School school;
 
     public Student(String firstname, String lastname, String email, int age) {

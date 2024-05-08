@@ -1,5 +1,6 @@
-package com.mert.example;
+package com.mert.example.studentprofile;
 
+import com.mert.example.student.Student;
 import jakarta.persistence.*;
 
 @Entity

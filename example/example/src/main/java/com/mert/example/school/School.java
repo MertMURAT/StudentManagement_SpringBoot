@@ -1,5 +1,7 @@
-package com.mert.example;
+package com.mert.example.school;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mert.example.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,6 +20,7 @@ public class School {
     @OneToMany(
             mappedBy = "school"
     )
+    @JsonManagedReference
     private List<Student> students;
 
     public School() {
@@ -26,7 +29,6 @@ public class School {
     public School(String name) {
         this.name = name;
     }
-
 
     public Integer getId() {
         return id;
@@ -42,5 +44,13 @@ public class School {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

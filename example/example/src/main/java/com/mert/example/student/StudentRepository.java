@@ -1,4 +1,4 @@
-package com.mert.example;
+package com.mert.example.student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
